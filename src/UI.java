@@ -137,10 +137,7 @@ public class UI
 
         waitingLabel.setVisible(false);
 
-        if (IsInternetAvailable())
-            noConnectionLabel.setVisible(false);
-        else
-            noConnectionLabel.setVisible(true);
+        CheckConnection();
     }
 
     private void AddListener()
@@ -217,6 +214,7 @@ public class UI
                 // nhưng nhấn Enter vẫn thực hiện convert
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                 {
+                    CheckConnection();
                     if (!fromtf.getText().isEmpty())
                     {
                         String inputStr = RemoveComma(fromtf.getText());
@@ -262,6 +260,7 @@ public class UI
             @Override
             public void actionPerformed(ActionEvent e) 
             {
+                CheckConnection();
                 if (!fromtf.getText().isEmpty())
                 {
                     String inputStr = RemoveComma(fromtf.getText());
@@ -345,6 +344,14 @@ public class UI
         DataProcessing.fromUnit = (String)fromComboBox.getSelectedItem();
         // set(toUnit)
         DataProcessing.toUnit = (String)toComboBox.getSelectedItem();
+    }
+
+    private void CheckConnection()
+    {
+        if (IsInternetAvailable())
+            noConnectionLabel.setVisible(false);
+        else
+            noConnectionLabel.setVisible(true);
     }
 
     private String RemoveComma(String str) // (1)
